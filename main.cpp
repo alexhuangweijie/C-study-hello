@@ -25,6 +25,7 @@ using namespace std;
      return 0;
  }*/
 
+/*testing the Eigen template
 int main (){
     Matrix<double, 3,3> A;
     A<<1,2,3,
@@ -35,5 +36,8 @@ int main (){
     cout<< A <<endl;
 return 0;
 };
+*/
+
+
 
 

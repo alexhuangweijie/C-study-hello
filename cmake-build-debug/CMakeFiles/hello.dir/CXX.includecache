@@ -6,13 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/hwj/CLionProjects/hello/Stack.cpp
+/home/hwj/CLionProjects/hello/Stack.h
+string
+-
+vector
+-
 
 /home/hwj/CLionProjects/hello/main.cpp
 iostream
 -
 Eigen/Dense
 -
+Stack.h
+/home/hwj/CLionProjects/hello/Stack.h
 
 /home/hwj/Downloads/eigen3/Eigen/Cholesky
 Core

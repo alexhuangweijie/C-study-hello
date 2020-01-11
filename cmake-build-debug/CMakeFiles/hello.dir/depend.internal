@@ -3,7 +3,9 @@
 
 CMakeFiles/hello.dir/Stack.cpp.o
  /home/hwj/CLionProjects/hello/Stack.cpp
+ /home/hwj/CLionProjects/hello/Stack.h
 CMakeFiles/hello.dir/main.cpp.o
+ /home/hwj/CLionProjects/hello/Stack.h
  /home/hwj/CLionProjects/hello/main.cpp
  /home/hwj/Downloads/eigen3/Eigen/Cholesky
  /home/hwj/Downloads/eigen3/Eigen/Core

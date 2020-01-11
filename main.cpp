@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Eigen/Dense>
+#include "Stack.h"
 
 using namespace Eigen;
 using namespace std;
@@ -38,6 +39,53 @@ return 0;
 };
 */
 
+
+
+
+MatrixXd myproduct (MatrixXd &a,MatrixXd &b,MatrixXd &c,int m1,int m2){
+    for (int index1_1 = 0;index1_1<m1;++index1_1){
+        for (int index1_2 = 0;index1_2<b.rows();++index1_2){
+            for (int index1_3 = 0;index1_3<m2;++index1_3){
+                for(int index1_4 = 0;index1_4<b.rows();++index1_4){
+                    int temp_index1 = index1_1 *b.rows()*m2+index1_2*m2+index1_3;
+                    //temp_index2 = index;
+                    a(temp_index1,1) = a(temp_index1,1)+b(index1_2,index1_4)*c(temp_index1,1);
+                }
+            }
+        }
+    }
+}
+int main(){
+    MatrixXd A(27,1);
+    MatrixXd B(3,3);
+    MatrixXd C(27,1);
+    MatrixXd D(9,1);
+    int _size_m1 = 3;
+    int _size_m2 = 3;
+    D <<1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9;
+    A <<D,
+        D,
+        D;
+    B <<1,2,3,
+        4,5,6,
+        7,8,9;
+    C <<A;
+    //cout<<A.cols();
+    cout<<A;
+    MatrixXd E(27,1);
+    E = myproduct(A,B,C,_size_m1,_size_m2);
+    cout<<E;
+    return 0;
+
+}
 
 
 

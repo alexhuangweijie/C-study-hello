@@ -6,6 +6,7 @@
 #define HELLO_STACK_H
 #include <string>
 #include <vector>
+using namespace std;
 
 class Stack {
 public:
@@ -22,3 +23,4 @@ private:
 
 
 #endif //HELLO_STACK_H
+

@@ -42,18 +42,22 @@ return 0;
 
 
 
-MatrixXd myproduct (MatrixXd &a,MatrixXd &b,MatrixXd &c,int m1,int m2){
-    for (int index1_1 = 0;index1_1<m1;++index1_1){
-        for (int index1_2 = 0;index1_2<b.rows();++index1_2){
-            for (int index1_3 = 0;index1_3<m2;++index1_3){
-                for(int index1_4 = 0;index1_4<b.rows();++index1_4){
-                    int temp_index1 = index1_1 *b.rows()*m2+index1_2*m2+index1_3;
-                    //temp_index2 = index;
-                    a(temp_index1,1) = a(temp_index1,1)+b(index1_2,index1_4)*c(temp_index1,1);
+MatrixXd myproduct (MatrixXd a,MatrixXd b,MatrixXd c,int m1,int m2){
+    for (int index1_1 = 1;index1_1<=m1;++index1_1){
+        for (int index1_2 = 1;index1_2<=b.rows();++index1_2){
+            for (int index1_3 = 1;index1_3<=m2;++index1_3){
+                for(int index1_4 = 1;index1_4<=b.rows();++index1_4){
+                    int temp_index1 = (index1_1-1) *b.rows()*m2+(index1_2-1)*m2+index1_3-1;
+                    int temp_index2 =(index1_1-1)*b.rows()*m2 + (index1_4-1)*m2 + index1_3-1;
+                    //cout<<temp_index2<<endl;
+                    //cout<<temp_index2<<endl;
+                    a(temp_index1,0) = a(temp_index1,0)+b(index1_2-1,index1_4-1)*c(temp_index2,0);
+                    //cout<<c(temp_index2,0);
                 }
             }
         }
     }
+return a;
 }
 int main(){
     MatrixXd A(27,1);
@@ -78,13 +82,14 @@ int main(){
         4,5,6,
         7,8,9;
     C <<A;
-    //cout<<A.cols();
-    cout<<A;
-    MatrixXd E(27,1);
-    E = myproduct(A,B,C,_size_m1,_size_m2);
+    /*cout<<C(1,0);
+    int temp = 1;
+    C(1,0)=temp;
+    cout<<temp;
+    cout<<C(temp,0);*/
+    MatrixXd E = myproduct(A,B,C,_size_m1,_size_m2);
     cout<<E;
     return 0;
-
 }
 
 

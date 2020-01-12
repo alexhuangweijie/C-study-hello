@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include "Stack.h"
+#include <ctime>
 
 using namespace Eigen;
 using namespace std;
@@ -39,20 +40,15 @@ return 0;
 };
 */
 MatrixXd myproduct (MatrixXd b,MatrixXd c,int m1,int m2) {
-    /*this the a prodduct function used in dmrg algorithm
-     * which will do kronecker product of two identity matrix of size m1 and m2 with matrix B
-     * then the result will do matrix product with c
-     * return a matrix of size (m1*b.rows*m2.1)
-     * same as the size of c
-     * */
-
     MatrixXd a(c.rows(),c.cols());
+    int temp_index1 = 0;
+    int temp_index2 = 0;
     for (int index1_1 = 1; index1_1 <= m1; ++index1_1) {
         for (int index1_2 = 1; index1_2 <= b.rows(); ++index1_2) {
             for (int index1_3 = 1; index1_3 <= m2; ++index1_3) {
                 for (int index1_4 = 1; index1_4 <= b.rows(); ++index1_4) {
-                    int temp_index1 = (index1_1 - 1) * b.rows() * m2 + (index1_2 - 1) * m2 + index1_3 - 1;
-                    int temp_index2 = (index1_1 - 1) * b.rows() * m2 + (index1_4 - 1) * m2 + index1_3 - 1;
+                    temp_index1 = (index1_1 - 1) * b.rows() * m2 + (index1_2 - 1) * m2 + index1_3 - 1;
+                    temp_index2 = (index1_1 - 1) * b.rows() * m2 + (index1_4 - 1) * m2 + index1_3 - 1;
                     //cout<<temp_index1<<endl;
                     //cout<<temp_index2<<endl;
                     a(temp_index1, 0) = a(temp_index1, 0) + b(index1_2 - 1, index1_4 - 1) * c(temp_index2, 0);
@@ -64,34 +60,24 @@ MatrixXd myproduct (MatrixXd b,MatrixXd c,int m1,int m2) {
     return a;
 }
 int main(){
-    MatrixXd A(27,1);
-    MatrixXd B(3,3);
-    MatrixXd C(27,1);
-    MatrixXd D(9,1);
-    int _size_m1 = 3;
-    int _size_m2 = 3;
-    D <<1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9;
-    A <<D,
-        D,
-        D;
-    B <<1,2,3,
-        4,5,6,
-        7,8,9;
-    C <<A;
+    //MatrixXd A(27,1);
+    MatrixXd B = MatrixXd::Random(10,10);
+    MatrixXd C = MatrixXd::Random(400,1);
+    //MatrixXd D(9,1);
+    int _size_m1 = 4;
+    int _size_m2 = 10;
     /*cout<<C(1,0);
     int temp = 1;
     C(1,0)=temp;
     cout<<temp;
     cout<<C(temp,0);*/
-    MatrixXd E = myproduct(B,C,_size_m1,_size_m2);
-    cout<<E;
+    MatrixXd E;
+    clock_t t1 = clock();
+    for (int i = 0; i<=100000;++i){
+        E = myproduct(B,C,_size_m1,_size_m2);
+    }
+    clock_t t2 = clock();
+    //cout<<E<<endl;
+    cout<<(double)(t2-t1)/CLOCKS_PER_SEC<<endl;
     return 0;
 }
